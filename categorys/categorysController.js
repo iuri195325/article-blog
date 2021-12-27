@@ -4,13 +4,30 @@ const Category = require('../categorys/category')
 const slugify = require('slugify');
 
 router.get('/admin/categorys/new', (req, res) => {
-    res.render("admin/categorys/new");
+    res.render("categorys/new");
 });
 router.get('/admin/categorys', (req, res) => {
     Category.findAll().then((category) => {
-        res.render("admin/categorys/index", {category: category});
+        res.render("categorys/index", {category: category});
     });
 });
+
+router.post('/categorys/save', (req, res) => {
+    var title = req.body.title;
+    if(title != undefined) {
+
+        Category.create({
+            title: title,
+            slug: slugify(title)
+        }).then(() => {
+            res.redirect("/admin/categorys");
+        })
+    }else{
+        res.redirect("/");
+    }
+});
+
+
 router.post('/admin/category/delete', (req, res) => {
     var id = req.body.id;
     if (id != undefined) {
@@ -28,19 +45,35 @@ router.post('/admin/category/delete', (req, res) => {
     }
 });
 
-router.post('/category/save', (req, res) => {
-    var title = req.body.title;
-    if(title != undefined) {
 
-        Category.create({
-            title: title,
-            slug: slugify(title)
-        }).then(() =>{
-            res.redirect("/admin/categorys");
-        })
+router.get('/category/edit/:id', (req, res) => {
+    var id = req.params.id;
+    if(isNaN(id)){
+        res.send(404);
     }else{
-        res.redirect("/");
+
+    
+        Category.findOne({where: {id: id}}).then(category => {
+            if(category != undefined){
+                res.render("categorys/edit", {category:category});
+            }else{
+                res.send(404);
+            }
+        })
+        
     }
+})
+
+router.post('/category/edit/save', (req, res) => {
+    var id = req.body.id;
+    var title = req.body.title;
+    Category.update({ title: title, slug: slugify(title) }, {
+        where: { id: id }
+    }).then(() => {
+        res.redirect('/admin/categorys');
+
+    })
+    
 });
 
 

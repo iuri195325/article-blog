@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const connection = require('./database/database');
-const categorysController = require('./categorys/categorysController');
-const articlesController = require('./articles/articlesCotroller');
-const Article = require('./articles/Article');
-const Category = require("./categorys/category");
+const connection = require('../database/database');
+const categorysController = require('../categorys/categorysController');
+const articlesController = require('../articles/articlesCotroller');
+const Article = require('../articles/Article');
+const Category = require("../categorys/category");
+
+app.set('views', '../views');
+app.set('view engine', 'ejs');
 
 connection.authenticate().then(()=>{
     console.log(":D");
@@ -14,9 +17,7 @@ connection.authenticate().then(()=>{
 })
 
 
-//Config EJS
-app.set('view engine','ejs');
-app.use(express.static('public'));
+
 
 //Config BodyParser
 app.use(bodyParser.urlencoded({extended: false}));

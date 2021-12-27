@@ -1,5 +1,5 @@
-<%- include('../../partials/header.ejs'); %>
-<%- include('../../partials/navbar.ejs'); %>
+<%- include('../partials/header.ejs'); %>
+<%- include('../partials/navbar.ejs'); %>
 <div class="container">
     <br>
     <div class="card">
@@ -7,7 +7,7 @@
             <h1>Cadastrar uma nova Categoria</h1>
         </div>
         <div class="card-body">
-            <form method="POST" action="/category/save">
+            <form method="POST" action="/categorys/save">
                 <input class="form-control" name="title" type="text" placeholder="Nova Categoria"></>
                 <br>
                 <button class="btn btn-success"> Cadastrar</button>
@@ -16,4 +16,4 @@
     </div>
 </div>
 
-<%- include ('../../partials/footer.ejs'); %>
+<%- include ('../partials/footer.ejs'); %>

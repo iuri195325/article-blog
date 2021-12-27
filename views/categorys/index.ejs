@@ -1,5 +1,5 @@
-<%- include('../../partials/header.ejs'); %>
-<%- include('../../partials/navbar.ejs'); %>
+<%- include('../partials/header.ejs'); %>
+<%- include('../partials/navbar.ejs'); %>
 <div class="container">
     <hr>
     <h2>Categorias</h2>
@@ -19,15 +19,24 @@
                 <th><%= category.title %></th>
                 <th><%= category.slug %></th>
                 <th>
-                    <button class="btn btn-warning">Editar</button> 
-                    <form method="POST" action="/admin/category/delete" style="display:inline">
+                    <a class="btn btn-warning"  href="/category/edit/<%= category.id %>">Editar</a>
+                    <form method="POST" action="/admin/category/delete" style="display:inline" onsubmit="deletar(event, this)">
                         <input type="hidden" name="id" value="<%= category.id %>">
-                        
                         <button class="btn btn-danger">Excluir</button>
-                    </form>    
+                    </form>  
                 </th>
             </tr>
         <% }) %>
     </table>
 </div>
-<%- include ('../../partials/footer.ejs'); %>
+    <script>
+        function deletar(event, form){
+            event.preventDefault();
+            var descison = confirm("Tem certeza que quer excluir?");
+            if(descison){
+                form.submit();
+            }
+        }
+    </script>
+
+<%- include ('../partials/footer.ejs'); %>
