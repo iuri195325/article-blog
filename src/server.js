@@ -30,6 +30,6 @@ app.get("/", (req, res) => {
 app.use("/", categorysController);
 app.use("/", articlesController);
 
-app.listen(8182, function (err) {
+app.listen(8181, function (err) {
     console.log("servidor aberto")
 })
