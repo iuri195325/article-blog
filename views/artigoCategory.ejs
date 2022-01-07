@@ -1,22 +1,23 @@
 <%- include('partials/header.ejs'); %>
-<%- include('partials/navbarHome.ejs'); %>
+
 <body>
     <div class="container">
         <br>
         <hr>
         <h2>Artigos Gratis</h2>
         <hr>
-        <% articles.forEach(articles => {  %>
+        <% article.forEach(article => {  %>
             <div class="card">
                 <div class="card-header">
-                    <%= articles.title %>
+                    <%= article.title %>
                 </div>
                 <div class="card-body">
-                    <a href="/artigos/<%= articles.id %>" class="btn btn-primary">Ler artigo</a>
+                    <a href="/artigos/<%= category.slug %>" class="btn btn-primary">Ler artigo</a>
                 </div>
             </div>
             <br>
          <% }) %>   
     </div>
 </body>
+
 <%- include ('partials/footer.ejs'); %>

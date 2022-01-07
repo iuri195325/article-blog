@@ -1,0 +1,44 @@
+<%- include('../partials/header.ejs'); %>
+<%- include('../partials/navbar.ejs'); %>
+<div class="container">
+    <hr>
+    <h2>Artigos</h2>
+    <a class="btn btn-success" href="/admin/articles/new">Criar Novo Aritgo</a> 
+    
+    <hr>
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Slug</th>
+            <th>Category</th>
+            <th>ações</th>
+        </tr>
+        <% articles.forEach(articles =>{ %>
+            <tr>    
+                <th><%= articles.id %></th>
+                <th><%= articles.title %></th>
+                <th><%= articles.slug %></th>
+                <th> <%= articles.Category.title %> </th>
+                <th>
+                    <a class="btn btn-warning"  href="/category/edit/<%= articles.id %>">Editar</a>
+                    <form method="POST" action="/admin/article/delete" style="display:inline" onsubmit="deletar(event, this)">
+                        <input type="hidden" name="id" value="<%= articles.id %>">
+                        <button class="btn btn-danger">Excluir</button>
+                    </form>  
+                </th>
+            </tr>
+        <% }) %>
+    </table>
+</div>
+    <script>
+        function deletar(event, form){
+            event.preventDefault();
+            var descison = confirm("Tem certeza que quer excluir?");
+            if(descison){
+                form.submit();
+            }
+        }
+    </script>
+
+<%- include ('../partials/footer.ejs'); %>

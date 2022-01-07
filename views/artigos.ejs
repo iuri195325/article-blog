@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs'); %>
+<%- include('partials/navbarHome.ejs'); %>
+<body>
+ <div class="container">
+   <% articles.forEach(articles => {  %>
+        <div>
+            <h1><%= articles.title %></h1>
+        </div>
+        <div>
+            <%- articles.body %>
+        </div>
+    <% }) %>    
+ </div>
+</body>
+<%- include ('partials/footer.ejs'); %>
